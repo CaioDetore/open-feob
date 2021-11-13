@@ -1,0 +1,347 @@
+body, html
+{
+    font-family: 'Roboto', sans-serif;
+}
+#header
+{
+    width: 100%;
+    background-color: transparent;
+    transition: background ease-out 0.2s;
+    background-color: var(--secondary);
+}
+
+#header.active
+{
+    position: fixed;
+    /* background: white; */
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+#header img 
+{
+    margin-left: 30px;
+}
+
+#header .navbar-collapse
+{
+    width: auto;
+}
+
+#header .nav-link
+{
+    text-transform: uppercase;
+    font-weight: 500;
+    padding-left: 0;
+    padding-right: 0;
+    /* margin-left: 15px;
+    margin-right: 15px; */
+    color: white;
+    border-bottom: solid 4px transparent;
+}
+
+#header .nav-link:last-child
+{
+    margin-left: 30px;
+}
+
+#header .nav-link:hover
+{
+    border-bottom: solid 4px var(--primary-dark);
+    color: var(--medium);
+}
+
+#banner
+{
+    color: #fff;
+    text-shadow: 3px 3px 3px var(--primary);
+    position: relative;
+    background: url(../img/banner.jpg);
+    filter: grayscale(70%);
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+#bannercurso img
+{
+    position: relative;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+#banner h1
+{
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+#banner h4
+{
+    text-transform: uppercase;
+    font-size: 19px;
+}
+
+#banner input
+{
+    width: 300px;
+    border-radius: 50px;
+}
+
+#banner .busca
+{
+    background: url(../img/lupa.png) no-repeat;
+    width: 39px;
+    border-radius: 100%;
+    background-color: var(--light);
+    border: none;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.3);
+    transition: all ease-out 0.2s;
+}
+
+#banner .busca:hover
+{
+    transform: scale(1.05);
+}
+
+#menu a.destaque 
+{
+    display: block;
+    background: var(--light);
+    border-radius: 5px;
+    text-align: center;
+    padding: 20px;
+    color: #000;
+    text-decoration: none;
+    transition: all ease-out 0.2s;
+}
+
+#menu a.destaque:hover
+{
+    background: white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+    transform: scale(1.05);
+}
+
+#menu p
+{
+    color: var(--dark);
+}
+
+#menu a.destaque .img-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+#menu a.destaque .img-container img
+{
+    max-height: 160px;
+}
+
+#login .button 
+{
+    text-transform: lowercase;
+    font-weight: 500;
+
+}
+
+#cadastro .col
+{
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    background-color: var(--light);
+}
+
+/* SOBRECURSO */
+
+#sobrecurso .sobre_curso
+{
+    border: var(--dark) 2px solid;
+    box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.2);
+    background-color: var(--light);
+}
+
+#sobrecurso .sobre_tutor
+{
+    display: flex;
+    justify-content: end;
+}
+
+#sobrecurso .sobre_tutor img
+{
+    max-width: 50px;
+    max-height: 50px;
+}
+
+#sobrecurso p {
+    font-size: 1.5rem;
+}
+
+/* aulas.php */
+#info .nome-curso
+{
+    text-transform: uppercase;
+}
+
+#aulas .card
+{
+    display: block;
+    border: 2px solid;
+    border-color: transparent;
+    text-align: center;
+    color: #000;
+    transition: all ease-out 0.2s;
+}
+
+#aulas .card:hover
+{
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.12);
+    transform: scale(1.01);
+    border-color: var(--primary-dark);
+}
+
+/* // */
+
+/* publicar_curso.php */
+#cadcurso .button
+{
+    text-transform: uppercase;
+    font-weight: 500;
+    width: 600px;
+}
+
+
+/* // */
+
+/* perfil */
+#perfil .dados
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#perfil .img-perfil img
+{
+    height: 150px;
+    width: 150px;
+}
+
+#perfil .ico img:hover{
+    transform: scale(1.03);
+    color: var(--primary);
+}
+
+/* // */
+
+
+/* footer */
+
+#footer li:hover
+{
+    transform: scale(1.03);
+    color: #000;
+}
+
+/* // */
+
+/* images bg */
+
+#login-bg
+{
+    color: #fff;
+    position: relative;
+    background: url(../img/bgimg-login.png);
+    background-size: cover;
+    /* background-position: center; */
+    background-repeat: no-repeat;
+}
+
+#login-bg a
+{
+    color: white;
+    text-decoration: none;
+}
+
+#login-bg a:hover
+{
+    color: var(--primary);
+}
+
+#login-bg .alerta a
+{
+    color: var(--primary-dark);
+
+}
+
+#login-bg .alerta a:hover
+{
+    color: var(--primary);
+}
+
+
+/* FISCAL CURSO */
+#fiscal-curso tbody td a i
+{
+    cursor: pointer;
+    transform: scale(2);
+}
+
+#fiscal-curso tbody td i:hover
+{
+    cursor: pointer;
+    transform: scale(2.5);
+}
+
+/* // */
+
+/* SIDENAV */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--secondary);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav {
+    color: white;
+    font-size: 25px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: var(--medium);
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: white;
+    background-color: var(--secondary-light);
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
