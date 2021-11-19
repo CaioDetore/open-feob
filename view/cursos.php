@@ -2,6 +2,10 @@
   include_once('../model/conexao.php');
   session_start();
 
+  if ($_GET['pagina'] == null){
+    header('Location:cursos.php?pagina=0');
+  }
+
   // $RES=mysqli_query($conn, "select * from cursos where ativo = 1");
   // $CURSOS=mysqli_fetch_array($RES, MYSQLI_NUM); 
 

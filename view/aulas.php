@@ -1,6 +1,10 @@
 <?php
   session_start();
 
+  if ($_GET['c'] == null){
+    header('Location:cursos.php?pagina=0');
+  }
+
     // puxando os selescts feito para colocar os dados (as variaveis estão no arquivo de include)
   include('../controller/busca_curso_aluno_user.php')
 
@@ -82,7 +86,7 @@
     <div id="info" class="container-fluid">
         
         <div class="nome-curso text-center justify-content-center">
-            <h1> <?php echo($CURSO[2]); ?> </h1>
+            <h1> <a href="pagina_curso.php?c=<?php echo $ID_CURSO ?>"> <?php echo($CURSO[2]); ?> </a> </h1>
             <hr>
         </div>
 

@@ -1,8 +1,10 @@
 <?php
   session_start();
-
+  if ($_GET['c'] == null || $_GET['a'] == null){
+    header('Location:cursos.php?pagina=0');
+  }
     // puxando os selescts feito para colocar os dados (as variaveis estão no arquivo de include)
-  include('../controller/busca_curso_aluno_user.php');
+  include('../controller/busca_curso_aluno_user.php');  
 
   $ID_AULA = $_GET['a'];
 

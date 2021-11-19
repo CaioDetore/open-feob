@@ -1,18 +1,6 @@
 <?php
     include_once('../model/conexao.php');
-    session_start();
-    if((!isset($_SESSION['email_usuario']) == true) and (!isset($_SESSION['senha']) == true))
-    {
-        unset($_SESSION['email_usuario']);
-        unset($_SESSION['senha']);
-        $_SESSION['nologin'] = 'Necessário uma conta';
-        header('Location: login.php');
-    }
-    
-    $email = $_SESSION['email_usuario'];
-
-    $RES=mysqli_query($conn, "select * from usuario where email_usuario ='$email'");
-    $PERFIL=mysqli_fetch_array($RES, MYSQLI_NUM); 
+    include_once('../controller/logado_perfil_editar.php')
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +81,7 @@
                               <li class="ms-3"> <a class="text-muted" href="#"> <img src="../img/fb-ico.png" class="bi" width="24" height="24"> </a></li>
                               <li class="ms-3"> <a class="text-muted" href="#"> <img src="../img/tt-ico.png" class="bi" width="24" height="24"> </a></li>
                               <li class="ms-3"> <a class="text-muted" href="#"> <img src="../img/yt-ico.png" class="bi" width="24" height="24"> </a></li>
-                              <li class="ms-3"> <a class="text-muted" href="#"> <img src="../img/inst-ico.png" class="bi" width="24" height="24"> </a></li>
+                              <li class="ms-3"> <a class="text-muted" href="<?php echo $PERFIL[11] ?>" target="_blank"> <img src="../img/inst-ico.png" class="bi" width="24" height="24"> </a></li>
                             </ul>
                         </div>
 
