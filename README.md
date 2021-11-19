@@ -2,7 +2,7 @@
 
 ### Olá :raising_hand_man: 
 
-Esse projeto faz parte do "Projeto de computação em Nuvem" do curso de Análise e Desenvolvimento da faculdade Unifeob.
+Esse projeto faz parte do "Projeto de computação em Nuvem" do curso de Análise e Desenvolvimento de Sistemas da faculdade Unifeob.
 
 O projeto é sobre uma plataforma de cursos, onde alunos da Unifeob poderiam publicar para outros alunos. 
 
