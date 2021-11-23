@@ -3,8 +3,17 @@
     include_once('../model/conexao.php');
     // include das informações
     include_once('../controller/logado_perfil_editar.php');
+    
+    $USER_ID = $_GET['u'];
+    if ($USER_ID == null) {
+        header('Location: perfil.php');
+    }
+    $RES_USER=mysqli_query($conn, "select * from usuario where id_usuario ='$USER_ID'");
+    $USER=mysqli_fetch_array($RES_USER, MYSQLI_NUM); 
+
     // include das querys
     include_once('../controller/select_perfil.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +31,11 @@
     <link rel="stylesheet" href="../css/main.css">
 
     <link rel="shortcut icon" href="../img/icone.png">
+
+    <!-- BOX ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     
-    <title>OpenFeob</title>
+    <title>OpenFeob - Perfil <?php echo($USER[1].' '.$USER[2]);?> </title>
 </head>
 <body>
     <!-- COMEÇO HEADER -->
@@ -71,24 +83,24 @@
                         <img src="../img/img-perfil.jpg" class="img-fluid rounded-circle"> 
                     </div>
                     <div class="pt-3">
-                        <h3 class="text-center"> <?php echo($PERFIL[1].' '.$PERFIL[2]); ?> <a href="editar_perfil.php" class="ico"> <img src="../img/edit-ico.png" class="img-fluid"> </a> </h3>   <hr>
+                        <h3 class="text-center"> <?php echo($USER[1].' '.$USER[2]); ?>  </h3>   <hr>
                         <h6>Cursos Matriculados: <?php 
-                            $consulta_matricula = mysqli_query($conn, 'SELECT * FROM matricula WHERE usuario_id_usuario = '.$PERFIL[0]);
+                            $consulta_matricula = mysqli_query($conn, 'SELECT * FROM matricula WHERE usuario_id_usuario = '.$USER[0]);
                             echo mysqli_num_rows($consulta_matricula);
                         ?> </h6>
                         <h6>Cursos Finalizados: <!-- php --></h6>
                         <h6>Cursos Públicados: <?php 
-                            $consulta_publicados = mysqli_query($conn, 'SELECT * FROM curso WHERE usuario_id_usuario = '.$PERFIL[0]);
+                            $consulta_publicados = mysqli_query($conn, 'SELECT * FROM curso WHERE usuario_id_usuario = '.$USER[0]);
                             echo mysqli_num_rows($consulta_publicados);
                         ?></h6>
 
                         <!-- redes sociais href= php com o link -->
                         <div id="footer" class="text-end justify-content-center d-flex pt-3">
                             <ul class="nav list-unstyled">
-                              <li class="ms-3"> <a class="text-muted" href="<?php echo $PERFIL[10] ?>" target="_blank"> <img src="../img/fb-ico.png" class="bi" width="24" height="24"> </a></li>
-                              <li class="ms-3"> <a class="text-muted" href="<?php echo $PERFIL[13] ?>" target="_blank"> <img src="../img/in-ico.png" class="bi" width="24" height="24"> </a></li>
-                              <li class="ms-3"> <a class="text-muted" href="<?php echo $PERFIL[12] ?>" target="_blank"> <img src="../img/yt-ico.png" class="bi" width="24" height="24"> </a></li>
-                              <li class="ms-3"> <a class="text-muted" href="<?php echo $PERFIL[11] ?>" target="_blank"> <img src="../img/inst-ico.png" class="bi" width="24" height="24"> </a></li>
+                              <li class="ms-3"> <a class="text-muted" href="<?php echo $USER[10] ?>" target="_blank"> <img src="../img/fb-ico.png" class="bi" width="24" height="24"> </a></li>
+                              <li class="ms-3"> <a class="text-muted" href="<?php echo $USER[13] ?>" target="_blank"> <img src="../img/in-ico.png" class="bi" width="24" height="24"> </a></li>
+                              <li class="ms-3"> <a class="text-muted" href="<?php echo $USER[12] ?>" target="_blank"> <img src="../img/yt-ico.png" class="bi" width="24" height="24"> </a></li>
+                              <li class="ms-3"> <a class="text-muted" href="<?php echo $USER[11] ?>" target="_blank"> <img src="../img/inst-ico.png" class="bi" width="24" height="24"> </a></li>
                             </ul>
                         </div>
 
@@ -108,11 +120,11 @@
 
                                     <?php 
                                         // query
-                                        $busca_matricula = $SELECT_PERFIL[1];
+                                        $busca_matricula = $SELECT_USER[1];
                                         $limite = mysqli_query($conn, $busca_matricula);
 
-                                        $RES2=mysqli_query($conn, $busca_matricula);
-                                        $CURSO=mysqli_fetch_array($RES2, MYSQLI_NUM); 
+                                        $RES_MATRICULA=mysqli_query($conn, $busca_matricula);
+                                        $CURSO=mysqli_fetch_array($RES_MATRICULA, MYSQLI_NUM); 
 
                                         if (mysqli_num_rows($limite) > 0) {
                                             while($dados = mysqli_fetch_assoc($limite))
@@ -131,7 +143,7 @@
                                                 ');
                                             }
                                         } else {
-                                            echo('<h4 class="subtitle"> Você não está matriculado em nenhum curso. Clique <a href="cursos.php?pagina=0"> aqui <a/> e comece a estudar!');
+                                            echo('<h4 class="subtitle"> '.$USER[1].' está inscrito em nenhum curso.');
                                         }
                                     ?> 
 
@@ -147,7 +159,7 @@
                                 <div class="row d-flex justify-content-center">
                         
                                     <?php 
-                                        $busca = $SELECT_PERFIL[0];
+                                        $busca = $SELECT_USER[0];
                                         $limite = mysqli_query($conn, $busca);
 
                                         $RES2=mysqli_query($conn, $busca);
@@ -170,7 +182,7 @@
                                                 ');
                                             }
                                         } else {
-                                            echo('<h4 class="subtitle"> Você não criou nenhum curso.');
+                                            echo('<h4 class="subtitle"> '.$USER[1].' não possui cursos.');
                                         }
                                     ?> 
 

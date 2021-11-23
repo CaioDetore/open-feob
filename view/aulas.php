@@ -65,20 +65,35 @@
     </div>
     <!-- FIM BANNER -->
 
-    <!-- AVISO QUE A AULA FOI CADASTRADA -->
+    <!-- AVISO QUE A AULA FOI CADASTRADA OU QUE A MATRICULA FOI REALIZADA -->
     <?php
-            if(isset($_SESSION['successcadaula'])):
-         ?>
-            <div class="alert alert-success d-flex align-items-center" role="alert">
-               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                <div>
-                    Aula publicada com sucesso!
-                </div>
-            </div>
+      if(isset($_SESSION['successcadaula'])):
+    ?>
+      <div class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+          <div>
+            Aula publicada/editada com sucesso!
+          </div>
+      </div>
 
-        <?php
-            endif;
-            unset($_SESSION['successcadaula']);
+    <?php
+      endif;
+      unset($_SESSION['successcadaula']);
+    ?>
+    <!-- matricula -->
+    <?php
+      if(isset($_SESSION['matricula_sucedida'])):
+    ?>
+      <div class="alert alert-success d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+          Matricula realizada com sucesso!
+        </div>
+      </div>
+              
+    <?php 
+      endif;
+      unset($_SESSION['matricula_sucedida']);
     ?>
     <!-- FIM AVISO -->
 
@@ -134,15 +149,15 @@
                 }     
             ?>
 
-                <?php
-                    if($CURSO[1] == $PERFIL[0]){
-                        echo('
-                            <div class="card col-lg-3 col-md-6 mb-lb-0 m-2">
-                                <a class="button btn" href="publicar_aula.php?c='.$ID_CURSO.'" style="width: 100%;"> Adicionar Aula <i class="bx bx-add-to-queue"></i>  </button>
-                            </div>
-                        ');
-                    }
-                ?>
+            <?php
+              if($CURSO[1] == $PERFIL[0]){
+                echo('
+                  <div class="card col-lg-3 col-md-6 mb-lb-0 m-2">
+                    <a class="button btn" href="publicar_aula.php?c='.$ID_CURSO.'" style="width: 100%;"> Adicionar Aula <i class="bx bx-add-to-queue"></i>  </button>
+                  </div>
+                ');
+              }
+            ?>
             </div>
 
         </div>

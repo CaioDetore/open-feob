@@ -4,7 +4,7 @@
 
   $pagina = $_GET['pg']; 
   if ($pagina == null) {
-    header('location:fiscal_cursos.php?pg=0');
+    header('location:fiscal_usuarios.php?pg=0');
   }
 
 ?>
@@ -64,8 +64,8 @@
     <div id="sidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <span class="d-flex justify-content-center"> <img src="../img/logo-nav.png" class="image-fluid" height="67"> </span> <hr>
-        <a href="index.php"> <i class='bx bx-arrow-back'></i>  Voltar </a>
-        <a href="fiscal_usuarios.php?pg=0"> Usuarios </a>
+        <a href="aulas.php?c="> <i class='bx bx-arrow-back'></i>  Voltar </a>
+        <a href="fiscal_usuarios.php?pg=10"> Usuarios </a>
         <a href="fiscal_cursos.php?pg=0"> Cursos </a>
     </div>
     <!-- FIM SIDENAV -->
@@ -81,21 +81,21 @@
 
       <!-- CURSOS-FISCAL -->
       <div id="fiscal-curso" class="container">
-        <h2 class="text-center m-1"> Cursos aguardando aprovação: </h2>
+        <h2 class="text-center m-1"> Usuarios cadastrados: </h2>
         <table class="table table-dark table-hover">        
             <thead>
             <tr> 
-              <td> Curso </td>
+              <td> Nome </td>
               <td> Aluno Tutor </td>
-              <td> Link Vídeo  </td>
-              <td> Data Publicação </td>
-              <td> Estado </td>
+              <!-- <td> Admin  </td> -->
+              <td> Data Cadastro </td>
+              <td> Ativo </td>
               <td>  </td>
             </tr>
             </thead>
             <tbody>
             <?php 
-              $busca= "SELECT * FROM curso"; 
+              $busca= "SELECT * FROM usuario"; 
 
               $total_registros_por_pg = '10'; 
                             
@@ -116,25 +116,27 @@
               $tp = $tr / $total_registros_por_pg; 
               
               while($dados = mysqli_fetch_assoc($limite))
-              {
-                $res_tutor=mysqli_query($conn, 'SELECT * FROM usuario WHERE id_usuario ='.$dados['usuario_id_usuario']);
-                $tutor=mysqli_fetch_array($res_tutor, MYSQLI_NUM); 
-                
+              {    
                 if($dados['ativo'] == 1){
-                  $atv = 'Aprovado';
+                  $atv = 'Ativo';
                 } else {
-                  $atv = 'Pendente';
+                  $atv = 'Desativo';
+                }
+
+                if($dados['tutor'] == 1){
+                    $ttr = 'Sim';
+                } else {
+                    $ttr = 'Não';
                 }
 
                 echo
                 ('
                   <tr title="Clique no olho para ver a requisição">
-                    <td>'.$dados['nome_curso'].'</td>
-                    <td>'.$tutor[1].'</td>
-                    <td>'.$dados['video_sobre'].'</td>
+                    <td>'.$dados['nome_usuario'].' '.$dados['sobrenome_usuario'].'</td>
+                    <td>'.$ttr.'</td>
                     <td>'.$dados['data_cadastro'].'</td>
                     <td>'.$atv.'</td>
-                    <td> <a href="pagina_curso.php?c='.$dados['id_curso'].'"> <i class="bx bx-show-alt" title="Clique para análisar a requisição" ></i> </a> </td>
+                    <td> <a href="perfil_user.php?u='.$dados['id_usuario'].'"> <i class="bx bx-show-alt" title="Clique para análisar o usuario" ></i> </a> </td>
                   </tr>
                 ');
               }

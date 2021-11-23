@@ -3,9 +3,9 @@
   session_start();
 
   if ($_GET['pagina'] == null){
-    header('Location:cursos.php?pagina=0');
+    header('Location:cursos.php?pagina=0'); 
   }
-
+  
   // $RES=mysqli_query($conn, "select * from cursos where ativo = 1");
   // $CURSOS=mysqli_fetch_array($RES, MYSQLI_NUM); 
 
@@ -65,7 +65,7 @@
           <div class="mb-md-0 mb-4"> 
             <h1 class="d-flex title justify-content-center pt-3"> Encontre um curso de sua escolha! </h1>
 
-            <form action="" method="get" class="d-flex title justify-content-center">
+            <form action="../model/pesquisa_model.php" method="post" class="d-flex title justify-content-center">
                 <input class="form-control" type="text" name="pesquisa" placeholder="Digite o nome do curso aqui..."/> 
                 <button type="submit" class="busca ms-3"> </button> 
             </form>	
@@ -92,6 +92,7 @@
                     </div>
                     <div class="col-auto">
                         <select class="form-select" name="" id="categoria" style="width: 300px;"> 
+                            <option value=""> Selecione </option>
                             <option value=""> Exatas </option>
                             <option value=""> 2 </option>
                         </select>
@@ -103,6 +104,7 @@
                     </div>
                     <div class="col-auto">
                         <select class="form-select" name="" id="categoria" style="width: 300px;"> 
+                            <option value=""> Selecione </option>
                             <option value=""> Direito </option>
                             <option value=""> 2 </option>
                         </select>
@@ -114,6 +116,7 @@
                     </div>
                     <div class="col-auto">
                         <select class="form-select" name="" id="categoria" style="width: 300px;"> 
+                            <option value=""> Selecione </option>
                             <option value=""> Data publicação </option>
                             <option value=""> Mais vistos </option>
                         </select>
@@ -128,12 +131,17 @@
     <!-- FIM FILTRO -->
 
     <!-- CURSOS/MENU -->
-    <div id="menu" class="block pt-3" style="background-color: white;">
+    <div id="menu" class="block pt-3" style="background-color: var(--light);">
         <div class="container">
   
           <div class="row d-flex justify-content-center">
               <?php
-                $busca= "SELECT * FROM curso"; // busca tudo
+                if (isset($_SESSION['query_pesquisa'])) {
+                  $busca= $_SESSION['query_pesquisa'];
+                } else {
+                  $busca= "SELECT * FROM curso"; // busca tudo
+                }
+                unset($_SESSION['query_pesquisa']);
 
                 $total_registros_por_pg = '10'; // define a qutde de elementos por pg
                 $pagina = $_GET['pagina']; // pega o num da pg
@@ -151,36 +159,43 @@
                 $limite = mysqli_query($conn, "$busca LIMIT $inicio, $total_registros_por_pg");
                 $total = mysqli_query($conn, $busca);
               
-                $tr = mysqli_num_rows($total); 
-                $tp = $tr / $total_registros_por_pg; // para saber quantas pg tem
-                
-                while($dados = mysqli_fetch_assoc($limite))
-                {
-                    echo('
-                      <div class="col-lg-3 col-md-6 mb-4 mb-lb-0">
-                      <a href="pagina_curso.php?c='.$dados['id_curso'].'" class="destaque" >
-                        <div class="img-container">
-                          <!-- php para inserção da imagem_curso -->
-                          <img src="../img/miniatura-curso.jpg" class="img-fluid" title="Clique para ver o curso.">
+                if (mysqli_num_rows($total) > 0) {
+                    $tr = mysqli_num_rows($total); 
+                    $tp = $tr / $total_registros_por_pg; // para saber quantas pg tem
+                    
+                    while($dados = mysqli_fetch_assoc($limite))
+                    {
+                        echo('
+                          <div class="col-lg-3 col-md-6 mb-4 mb-lb-0">
+                          <a href="pagina_curso.php?c='.$dados['id_curso'].'" class="destaque" >
+                            <div class="img-container">
+                              <!-- php para inserção da imagem_curso -->
+                              <img src="../img/miniatura-curso.jpg" class="img-fluid" title="Clique para ver o curso.">
+                            </div>
+                            <h5 class="text-uppercase"> '.$dados['nome_curso'].' </h5>
+                            <p class="mb-0"> '.$dados['descricao'].'</p>
+                            <button class="button btn btn-primary button-primary" style="width: 100%;"> Acessar curso </button>
+                          </a>
                         </div>
-                        <h5 class="text-uppercase"> '.$dados['nome_curso'].' </h5>
-                        <p class="mb-0"> '.$dados['descricao'].'</p>
-                        <button class="button btn btn-primary button-primary" style="width: 100%;"> Acessar curso </button>
-                      </a>
-                    </div>
-                    ');
-                }     
+                        ');
+                    }     
 
-                $anterior = $pc - 1;
-                $proximo = $pc + 1;
-                if($pc>1)
-                {
-                    echo("<a href = 'cursos.php?pagina='".$anterior."'>< - Anterior </a> ");
+                    if (mysqli_num_rows($total) > 10) {
+                      $anterior = $pc - 1;
+                      $proximo = $pc + 1;
+                      if($pc>1)
+                      {
+                          echo("<a href = 'cursos.php?pagina='".$anterior."'>< - Anterior </a> ");
+                      }
+                      if($pc<10)
+                      {
+                          echo("<a href='cursos.php?pagina='".$proximo."'> Proxima -> </a> ");
+                      }
+                    }
+                } else {
+                    echo('<h1> Nada encontrado... Clique <a href="cursos.php?pagina=0"> aqui </a> para voltar. </h1');
                 }
-                if($pc<10)
-                {
-                    echo("<a href='cursos.php?pagina='".$proximo."'> Proxima -> </a> ");
-                }
+                
               ?>
   
           </div>

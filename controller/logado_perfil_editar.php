@@ -12,5 +12,4 @@
 
         $RES=mysqli_query($conn, "select * from usuario where email_usuario ='$email'");
         $PERFIL=mysqli_fetch_array($RES, MYSQLI_NUM); 
-
 ?>

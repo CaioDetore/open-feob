@@ -4,24 +4,7 @@
   $ID_CURSO = $_GET['c'];
 
   include_once('../model/conexao.php');
-  if((!isset($_SESSION['email_usuario']) == true) and (!isset($_SESSION['senha']) == true))
-  {
-      unset($_SESSION['email_usuario']);
-      unset($_SESSION['senha']);
-      $_SESSION['nologin'] = 'É necessário estar logado para ver o curso.';
-      header('Location: login.php');
-  }
-    
-  $email = $_SESSION['email_usuario'];
-
-  $RES=mysqli_query($conn, "select * from usuario where email_usuario ='$email'");
-  $PERFIL=mysqli_fetch_array($RES, MYSQLI_NUM); 
-
-  $RES=mysqli_query($conn, "select * from curso where id_curso ='$ID_CURSO'");
-  $CURSO=mysqli_fetch_array($RES, MYSQLI_NUM); 
-
-  $RES2=mysqli_query($conn, "select * from usuario where id_usuario ='$CURSO[1]'");
-  $TUTOR=mysqli_fetch_array($RES2, MYSQLI_NUM); 
+  include_once('../controller/busca_curso_aluno_user.php');
 
 ?>
 <!DOCTYPE html>
@@ -79,20 +62,18 @@
       
     <!-- SOBRECURSO -->
     <!-- FORMULARIO -->
-    <form action="../model/editar_curso_model.php" method="$_POST"> 
+    <form action="../model/editar_curso_model.php" method="POST"> 
     <div id="sobrecurso" class="block"> 
       <div class="container">
         <div class="row">
 
-            <!-- sobre curso -->
             <div class="sobre_curso col-lg-4 col-md-6 align-self-center mb-md-0 mb-4 pt-3">
-              <h2 class="text-center"> Sobre o Curso </h2> <hr>
-              <p class="m-2 text-center title"> <b> <?php echo($CURSO[2]); ?> </b> </p>
-              <p class="m-2"> <b> Tempo estimado: </b> <input class="form-control" type="number" value="<?php echo($CURSO[6]); ?>" title="Insira um valor em horas"> </p>
-              <p class="m-2"> <b> Alunos matriculados: </b> </p>
-              <p class="m-2"> <b> Data de publicação: </b> <?php echo($CURSO[9]); ?> </p>
+              <h2 class="text-center"> Editar Curso </h2> <hr>
+              <p class="m-2"> <b> Nome do curso: </b> </p>
+              <p class="m-2 text-center title"> <b> <input type="text" class="form-control" value="<?php echo($CURSO[2]); ?>" title="Insira o nome do curso" name="nome_curso" required> </b> </p>
+              <p class="m-2"> <b> Tempo estimado: </b> <input class="form-control" type="number" value="<?php echo($CURSO[6]); ?>" title="Insira um valor em horas" name="tempo_estimado" required> </p>
               <p class="m-2"> <b> Descrição: </b> </p>
-              <p class="ms-2"> <textarea type="text box" class="form-control" title="Coloque aqui uma breve descrição do que se trata seu curso" name="descricao" id="descricao"> <?php echo($CURSO[7]); ?>  </textarea>  </p>
+              <p class="ms-2"> <textarea type="text box" class="form-control" title="Coloque aqui uma breve descrição do que se trata seu curso" name="descricao" id="descricao" required> <?php echo($CURSO[7]); ?>  </textarea>  </p>
             </div>
           
           <!-- fim sobre curso -->
@@ -100,7 +81,7 @@
           <!-- video sobre -->
           <div class="col-lg-8 col-md-6 align-self-center text-center">
             <h3> Video Sobre </h3>
-
+            <input type="text" class="form-control m-2" value=" <?php echo($CURSO[4]); ?>" name="video_sobre">
             <!-- tratamento do video -->
             <?php 
               $string_video = $CURSO[4];
@@ -126,30 +107,38 @@
     </div>
     <!-- FIM SOBRECURSO -->
 
-    <!-- INSCREVER-SE + PERFIL ALUNO TUTOR -->
+    <!-- EDITAR + PERFIL ALUNO TUTOR -->
     <div id="sobrecurso" class="block"> 
         <div class="container">
         <div class="row">
             
             <div class="col-lg-4 col-md-6 align-self-center mb-md-0 mb-4">
+                <input type="text" value="<?php echo($ID_CURSO); ?>" name="id_curso" id="id_curso" hidden>
                 <input type="submit" class="btn btn-primary button button-primary" style="width: 100%;">
             </div>
     </form>
     <!-- FIM FORMULARIO -->
+
             <!-- sobre tutor -->
             <div class="sobre_tutor col-lg-8 col-md-6 text-end">
             <div class="pe-5 text-end"> 
-                <h5> Publicado por: <?php echo($TUTOR[1]) ?> </h5>
-                <p>informações extras</p>
+                <h5> Publicado por: <?php echo($TUTOR[1].' '.$TUTOR[2])?> </h5>
+                <?php 
+                  if($CURSO[10] == null){
+                    $data = $CURSO[9];
+                  } else {
+                    $data = $CURSO[10];
+                  }
+                ?>
+                <p class="subtitle"> ultima alteração: <?php echo($data); ?></p>
             
             </div>
-            <img src="../img/golden-fish.png">
             </div>
             <!-- fim sobre tutor -->
         </div>
         </div>  
     </div>
-    <!-- FIM INSCREVER-SE + PERFIL ALUNO TUTOR -->
+    <!-- FIM EDITAR + PERFIL ALUNO TUTOR -->
 
 
 

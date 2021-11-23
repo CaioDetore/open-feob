@@ -90,7 +90,8 @@
               <p class="mb-0"> Crie um curso e compartilhe seus conhecimentos com seus colegas! </p>
             </a>
           </div>
-
+          
+<!--      Acessar o forum (não feito ainda)     
           <div class="col-lg-3 col-md-6 mb-4 mb-lb-0">
             <a href="#" class="destaque" >
               <div class="img-container mb-3">
@@ -99,7 +100,7 @@
               <h5 class="text-uppercase"> Acessar o fórum </h5>
               <p class="mb-0"> Acesse o fórum e fique ligado no que o pessoal anda comentando por aqui! </p>
             </a>
-          </div>
+          </div> -->
 
         </div>
 
@@ -115,12 +116,12 @@
           <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Início</a></li>
           <li class="nav-item"><a href="cursos.php" class="nav-link px-2 text-muted">Cursos</a></li>
           <li class="nav-item"><a href="publicar_curso.php" class="nav-link px-2 text-muted">Publicar Curso</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Sobre</a></li>
+          <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Sobre</a></li> -->
         </ul>
 
         <div class="row">
           <div class="col-lg-4 col-md-6 align-self-start mb-md-0 mb-4">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <a href="https://unifeob.edu.br" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1" target="_blank">
               <img src="../img/logofeob.png" class="img-fluid bi"  width="30" height="24">
             </a>
             <span class="text-muted">© 2021 OpenFeob, Inc</span>
@@ -128,10 +129,10 @@
         
           <div class="col-lg-8 col-md-6 text-end justify-content-end d-flex">
             <ul class="nav col-md-4  list-unstyled justify-content-end">
-              <li class="ms-3"> <a class="text-muted" href="#"> <img src="../img/fb-ico.png" class="bi" width="24" height="24"> </a></li>
-              <li class="ms-3"> <a class="text-muted" href="#"> <img src="../img/tt-ico.png" class="bi" width="24" height="24"> </a></li>
-              <li class="ms-3"> <a class="text-muted" href="#"> <img src="../img/yt-ico.png" class="bi" width="24" height="24"> </a></li>
-              <li class="ms-3"> <a class="text-muted" href="#"> <img src="../img/inst-ico.png" class="bi" width="24" height="24"> </a></li>
+              <li class="ms-3"> <a class="text-muted" href="https://www.facebook.com/unifeob/" target="_blank"> <img src="../img/fb-ico.png" class="bi" width="24" height="24"> </a></li>
+              <li class="ms-3"> <a class="text-muted" href="https://twitter.com/unifeob" target="_blank"> <img src="../img/tt-ico.png" class="bi" width="24" height="24"> </a></li>
+              <li class="ms-3"> <a class="text-muted" href="https://www.youtube.com/user/unifeob" target="_blank"> <img src="../img/yt-ico.png" class="bi" width="24" height="24"> </a></li>
+              <li class="ms-3"> <a class="text-muted" href="https://www.instagram.com/unifeob_oficial" target="_blank"> <img src="../img/inst-ico.png" class="bi" width="24" height="24"> </a></li>
             </ul>
           </div>
 

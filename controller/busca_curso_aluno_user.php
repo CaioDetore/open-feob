@@ -21,6 +21,9 @@
 
   $RES2=mysqli_query($conn, "select * from usuario where id_usuario ='$CURSO[1]'");
   $TUTOR=mysqli_fetch_array($RES2, MYSQLI_NUM); 
+
+  $RES_MATRICULA = mysqli_query($conn, "SELECT * FROM matricula WHERE curso_id_curso = $ID_CURSO");
+  $MATRICULA = mysqli_fetch_array($RES_MATRICULA, MYSQLI_NUM);
 //   como as variaveis estão em um array você precisa colocar o index do campo que vc quer o valor
 
 ?>
